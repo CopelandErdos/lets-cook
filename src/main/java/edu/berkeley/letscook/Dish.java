@@ -5,7 +5,7 @@ import java.util.Map;
 // understands the ingredients of each dish
 public class Dish {
 
-    private final Map<Ingredient, Double> ingredients;
+    private Map<Ingredient, Double> ingredients;
 
     public Dish() {
         this.ingredients = new HashMap<Ingredient, Double>();
@@ -23,5 +23,13 @@ public class Dish {
             }
         }
         return true;
+    }
+
+    public double cost() {
+        double totalCost = 0.0;
+        for (Ingredient ingredient : ingredients.keySet()) {
+            totalCost += ingredient.calculateCost(ingredients.get(ingredient));
+        }
+        return totalCost;
     }
 }

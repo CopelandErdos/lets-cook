@@ -9,11 +9,11 @@ public class DishTest {
 
     static Map<Ingredient, Double> availableIngredients = new HashMap<>();
 
-    static Ingredient fish = new Ingredient();
-    static Ingredient potato = new Ingredient();
-    static Ingredient chicken = new Ingredient();
-    static Ingredient carrot = new Ingredient();
-    static Ingredient onion = new Ingredient();
+    static Ingredient fish = new Ingredient(8.5);
+    static Ingredient potato = new Ingredient(0.8);
+    static Ingredient chicken = new Ingredient(4.5);
+    static Ingredient carrot = new Ingredient(0.5);
+    static Ingredient onion = new Ingredient(0.5);
     static Dish chips = new Dish();
     static Dish fishAndChips = new Dish();
     static Dish curryChicken = new Dish();
@@ -27,7 +27,7 @@ public class DishTest {
         availableIngredients.put(onion, 2.0);
 
         chips.addIngredient(potato, 1.0);
-        fishAndChips.addIngredient(fish, 2.0);
+        fishAndChips.addIngredient(fish, 1.5);
         fishAndChips.addIngredient(potato, 1.0);
         curryChicken.addIngredient(chicken, 1.5);
         curryChicken.addIngredient(potato, 1.0);
@@ -48,6 +48,11 @@ public class DishTest {
     @Test
     public void canMakeCurryChicken() {
         assertTrue(curryChicken.canMake(availableIngredients));
+    }
+
+    @Test
+    public void costOfFishAndChipsShouldBe13pt55() {
+        assertEquals(13.55, fishAndChips.cost(), 0.01);
     }
 
 }
