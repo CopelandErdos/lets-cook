@@ -32,4 +32,12 @@ public class Dish {
         }
         return totalCost;
     }
+
+    public int calories() {
+        int totalCalories = 0;
+        for (Ingredient ingredient : ingredients.keySet()) {
+            totalCalories += ingredient.calculateCalories(ingredients.get(ingredient));
+        }
+        return totalCalories;
+    }
 }

@@ -9,11 +9,11 @@ public class DishTest {
 
     static Map<Ingredient, Double> availableIngredients = new HashMap<>();
 
-    static Ingredient fish = new Ingredient(8.5);
-    static Ingredient potato = new Ingredient(0.8);
-    static Ingredient chicken = new Ingredient(4.5);
-    static Ingredient carrot = new Ingredient(0.5);
-    static Ingredient onion = new Ingredient(0.5);
+    static Ingredient fish = new Ingredient(8.5, 230);
+    static Ingredient potato = new Ingredient(0.8, 161);
+    static Ingredient chicken = new Ingredient(4.5, 600);
+    static Ingredient carrot = new Ingredient(0.5, 25);
+    static Ingredient onion = new Ingredient(0.5, 44);
     static Dish chips = new Dish();
     static Dish fishAndChips = new Dish();
     static Dish curryChicken = new Dish();
@@ -53,6 +53,11 @@ public class DishTest {
     @Test
     public void costOfFishAndChipsShouldBe13pt55() {
         assertEquals(13.55, fishAndChips.cost(), 0.01);
+    }
+
+    @Test
+    public void caloriesOfFishAndChipsShouldBe506() {
+        assertEquals(506, fishAndChips.calories(), 0.01);
     }
 
 }
