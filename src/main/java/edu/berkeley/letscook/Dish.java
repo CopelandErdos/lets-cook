@@ -1,6 +1,7 @@
 package edu.berkeley.letscook;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 // understands the ingredients of each dish
 public class Dish {
@@ -25,19 +26,24 @@ public class Dish {
         return true;
     }
 
-    public double cost() {
-        double totalCost = 0.0;
+    private double calculateValue(Function<Ingredient, Double> strategy) {
+        double totalValue = 0.0;
         for (Ingredient ingredient : ingredients.keySet()) {
-            totalCost += ingredient.calculateCost(ingredients.get(ingredient));
+            totalValue += ingredient.calculateProp(ingredients.get(ingredient), strategy);
         }
-        return totalCost;
+        return totalValue;
     }
 
-    public int calories() {
-        int totalCalories = 0;
-        for (Ingredient ingredient : ingredients.keySet()) {
-            totalCalories += ingredient.calculateCalories(ingredients.get(ingredient));
-        }
-        return totalCalories;
+
+    public double cost() {
+        return calculateValue(Ingredient.COST_STRATEGY);
+    }
+
+    public double calories() {
+        return calculateValue(Ingredient.CALORIE_STRATEGY);
+    }
+
+    public double protein() {
+        return calculateValue(Ingredient.PROTEIN_STRATEGY);
     }
 }
