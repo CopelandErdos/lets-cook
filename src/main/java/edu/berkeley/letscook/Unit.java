@@ -14,9 +14,6 @@ public enum Unit {
     }
 
     public double convertTo(Unit outputUnit, double magnitude) {
-//        if (type != outputUnit.type) {
-//            throw new RuntimeException("Cannot convert a " + type + " to a " + outputUnit.type);
-//        }
         return magnitude * ratio / outputUnit.ratio;
     }
 }

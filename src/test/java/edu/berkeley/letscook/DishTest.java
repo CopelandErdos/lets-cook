@@ -9,8 +9,8 @@ public class DishTest {
 
     static Map<Ingredient, Quantity> availableIngredients = new HashMap<>();
 
-    // fish and chicken per pound
-    // potato, carrot, onion per oz
+    // fish and chicken per lb
+    // potato, carrot, onion per item (mid-size item / oz)
     // units: cost-USD, calorie-calorie, protein-gram, carbohydrate-gram, fat-gram
     static Ingredient fish = new Ingredient(1, Unit.LB, 8.5, 454, 102, 6, 26);
     static Ingredient potato = new Ingredient(6, Unit.OZ, 0.8, 149, 3.5, 34, 0.2);
@@ -34,8 +34,8 @@ public class DishTest {
         fishAndChips.addIngredient(potato, 6, Unit.OZ);
         curryChicken.addIngredient(chicken, 12, Unit.OZ);
         curryChicken.addIngredient(potato, 6, Unit.OZ);
-        curryChicken.addIngredient(carrot, 4, Unit.OZ);
-        curryChicken.addIngredient(onion, 1.5, Unit.OZ);
+        curryChicken.addIngredient(carrot, 113.4, Unit.G);
+        curryChicken.addIngredient(onion, 42.5, Unit.G);
     }
 
     // 1st test - canMake dishes with one ingredient
@@ -80,4 +80,9 @@ public class DishTest {
         assertEquals(51, curryChicken.carbohydrate(), 0.01);
     }
 
+    // 8th test - fat of a dish, test unit conversion
+    @Test
+    public void fatOfCurryChickenShouldBe40pt2() {
+        assertEquals(40.2, curryChicken.fat(), 0.01);
+    }
 }
