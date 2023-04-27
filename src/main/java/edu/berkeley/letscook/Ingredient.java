@@ -3,22 +3,30 @@ import java.util.function.Function;
 
 // understands the properties of each ingredient
 public class Ingredient {
+    private final Quantity ingredientUnit;
     private final double cost;
     private final double calorie;
     private final double protein;
+    private final double carbohydrate;
+    private final double fat;
 
-    public Ingredient(double cost, double calorie, double protein) {
+    public Ingredient(double quantity, Unit unit, double cost, double calorie, double protein, double carbohydrate, double fat) {
+        this.ingredientUnit = new Quantity(quantity, unit);
         this.cost = cost;
         this.calorie = calorie;
         this.protein = protein;
+        this.carbohydrate = carbohydrate;
+        this.fat = fat;
     }
 
     static Function<Ingredient, Double> COST_STRATEGY = ingredient -> ingredient.cost;
     static Function<Ingredient, Double> CALORIE_STRATEGY = ingredient -> ingredient.calorie;
     static Function<Ingredient, Double> PROTEIN_STRATEGY = ingredient -> ingredient.protein;
+    static Function<Ingredient, Double> CARBOHYDRATE_STRATEGY = ingredient -> ingredient.carbohydrate;
+    static Function<Ingredient, Double> FAT_STRATEGY = ingredient -> ingredient.fat;
 
-    double calculateProp(double quantity, Function<Ingredient, Double> strategy) {
-        return strategy.apply(this) * quantity;
+    double calculateProp(Quantity quantity, Function<Ingredient, Double> strategy) {
+        return quantity.multiplyPerUnit(strategy.apply(this), ingredientUnit);
     }
 
 }

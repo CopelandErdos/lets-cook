@@ -7,35 +7,35 @@ import java.util.HashMap;
 
 public class DishTest {
 
-    static Map<Ingredient, Double> availableIngredients = new HashMap<>();
+    static Map<Ingredient, Quantity> availableIngredients = new HashMap<>();
 
     // fish and chicken per pound
-    // potato, carrot, onion per item
+    // potato, carrot, onion per oz
     // units: cost-USD, calorie-calorie, protein-gram, carbohydrate-gram, fat-gram
-    static Ingredient fish = new Ingredient(8.5, 230, 28);
-    static Ingredient potato = new Ingredient(0.8, 161, 3.5);
-    static Ingredient chicken = new Ingredient(4.5, 600, 80);
-    static Ingredient carrot = new Ingredient(0.5, 25, 0.8);
-    static Ingredient onion = new Ingredient(0.5, 44, 1.2);
+    static Ingredient fish = new Ingredient(1, Unit.LB, 8.5, 454, 102, 6, 26);
+    static Ingredient potato = new Ingredient(6, Unit.OZ, 0.8, 149, 3.5, 34, 0.2);
+    static Ingredient chicken = new Ingredient(1, Unit.LB, 4.5, 1012, 118, 8, 53);
+    static Ingredient carrot = new Ingredient(2, Unit.OZ, 0.5, 13, 0.4, 3, 0.1);
+    static Ingredient onion = new Ingredient(3, Unit.OZ, 0.5, 44, 1.2, 10, 0.1);
     static Dish chips = new Dish();
     static Dish fishAndChips = new Dish();
     static Dish curryChicken = new Dish();
 
 
     static {
-        availableIngredients.put(potato, 5.0);
-        availableIngredients.put(fish, 1.0);
-        availableIngredients.put(chicken, 2.5);
-        availableIngredients.put(carrot, 5.0);
-        availableIngredients.put(onion, 2.0);
+        availableIngredients.put(potato, new Quantity(30, Unit.OZ));
+        availableIngredients.put(fish, new Quantity(1, Unit.LB));
+        availableIngredients.put(chicken, new Quantity(2.5, Unit.LB));
+        availableIngredients.put(carrot, new Quantity(10, Unit.OZ));
+        availableIngredients.put(onion, new Quantity(6, Unit.OZ));
 
-        chips.addIngredient(potato, 1.0);
-        fishAndChips.addIngredient(fish, 1.5);
-        fishAndChips.addIngredient(potato, 1.0);
-        curryChicken.addIngredient(chicken, 1.2);
-        curryChicken.addIngredient(potato, 1.0);
-        curryChicken.addIngredient(carrot, 0.5);
-        curryChicken.addIngredient(onion, 0.5);
+        chips.addIngredient(potato, 0.5, Unit.LB);
+        fishAndChips.addIngredient(fish, 1.5, Unit.LB);
+        fishAndChips.addIngredient(potato, 6, Unit.OZ);
+        curryChicken.addIngredient(chicken, 12, Unit.OZ);
+        curryChicken.addIngredient(potato, 6, Unit.OZ);
+        curryChicken.addIngredient(carrot, 4, Unit.OZ);
+        curryChicken.addIngredient(onion, 1.5, Unit.OZ);
     }
 
     // 1st test - canMake dishes with one ingredient
@@ -64,14 +64,20 @@ public class DishTest {
 
     // 5th test - calories of a dish
     @Test
-    public void caloriesOfFishAndChipsShouldBe506() {
-        assertEquals(506, fishAndChips.calories(), 0.01);
+    public void caloriesOfFishAndChipsShouldBe830() {
+        assertEquals(830, fishAndChips.calories(), 0.01);
     }
 
     // 6th test - protein of a dish, implement strategy pattern
     @Test
-    public void proteinOfCurryChickenShouldBe100pt5() {
-        assertEquals(100.5, curryChicken.protein(), 0.01);
+    public void proteinOfCurryChickenShouldBe93pt4() {
+        assertEquals(93.4, curryChicken.protein(), 0.01);
+    }
+
+    // 7th test - carbohydrate of a dish, add units to Quantity
+    @Test
+    public void carbohydrateOfCurryChickenShouldBe51() {
+        assertEquals(51, curryChicken.carbohydrate(), 0.01);
     }
 
 }

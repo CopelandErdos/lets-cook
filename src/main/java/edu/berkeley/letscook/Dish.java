@@ -6,20 +6,20 @@ import java.util.function.Function;
 // understands the ingredients of each dish
 public class Dish {
 
-    private Map<Ingredient, Double> ingredients;
+    private Map<Ingredient, Quantity> ingredients;
 
     public Dish() {
-        this.ingredients = new HashMap<Ingredient, Double>();
+        this.ingredients = new HashMap<Ingredient, Quantity>();
     }
 
-    public void addIngredient(Ingredient ingredient, double quantity) {
-        this.ingredients.put(ingredient, quantity);
+    public void addIngredient(Ingredient ingredient, double quantity, Unit unit) {
+        this.ingredients.put(ingredient, new Quantity(quantity, unit));
     }
 
-    public boolean canMake(Map<Ingredient, Double> availableIngredients) {
+    public boolean canMake(Map<Ingredient, Quantity> availableIngredients) {
         for (Ingredient ingredient : ingredients.keySet()) {
             if (!(availableIngredients.keySet().contains(ingredient)
-                    && availableIngredients.get(ingredient) >= ingredients.get(ingredient))) {
+                    && availableIngredients.get(ingredient).moreThan(ingredients.get(ingredient)))) {
                 return false;
             }
         }
@@ -46,4 +46,13 @@ public class Dish {
     public double protein() {
         return calculateValue(Ingredient.PROTEIN_STRATEGY);
     }
+
+    public double carbohydrate() {
+        return calculateValue(Ingredient.CARBOHYDRATE_STRATEGY);
+    }
+
+    public double fat() {
+        return calculateValue(Ingredient.FAT_STRATEGY);
+    }
+
 }
