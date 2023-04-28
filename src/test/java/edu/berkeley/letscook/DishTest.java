@@ -21,6 +21,7 @@ public class DishTest {
     static Dish fishAndChips = new Dish(Method.FRY);
     static Dish curryChicken = new Dish(Method.STEW);
     static Dish roastChicken = new Dish(Method.ROAST);
+    static Dish steamFish = new Dish(Method.STEAM);
 
 
     static {
@@ -38,6 +39,7 @@ public class DishTest {
         curryChicken.addIngredient(carrot, 113.4, Unit.G);
         curryChicken.addIngredient(onion, 42.5, Unit.G);
         roastChicken.addIngredient(chicken, 2, Unit.LB);
+        steamFish.addIngredient(fish, 0.5, Unit.KG);
     }
 
     // 1st test - canMake dishes with one ingredient
@@ -92,6 +94,12 @@ public class DishTest {
     @Test
     public void fatOfRoastChickenShouldBe122() {
         assertEquals(122, roastChicken.fat(), 0.01);
+    }
+
+    // 10th test - test methods with 0 ratios
+    @Test
+    public void caloriesOfSteamFishShouldBe500pt44() {
+        assertEquals(500.44, steamFish.calories(), 0.01);
     }
 
 }
