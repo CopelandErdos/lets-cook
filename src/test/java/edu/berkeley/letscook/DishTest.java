@@ -17,9 +17,10 @@ public class DishTest {
     static Ingredient chicken = new Ingredient(1, Unit.LB, 4.5, 1012, 118, 8, 53);
     static Ingredient carrot = new Ingredient(2, Unit.OZ, 0.5, 13, 0.4, 3, 0.1);
     static Ingredient onion = new Ingredient(3, Unit.OZ, 0.5, 44, 1.2, 10, 0.1);
-    static Dish chips = new Dish();
-    static Dish fishAndChips = new Dish();
-    static Dish curryChicken = new Dish();
+    static Dish chips = new Dish(Method.FRY);
+    static Dish fishAndChips = new Dish(Method.FRY);
+    static Dish curryChicken = new Dish(Method.STEW);
+    static Dish roastChicken = new Dish(Method.ROAST);
 
 
     static {
@@ -36,6 +37,7 @@ public class DishTest {
         curryChicken.addIngredient(potato, 6, Unit.OZ);
         curryChicken.addIngredient(carrot, 113.4, Unit.G);
         curryChicken.addIngredient(onion, 42.5, Unit.G);
+        roastChicken.addIngredient(chicken, 2, Unit.LB);
     }
 
     // 1st test - canMake dishes with one ingredient
@@ -64,8 +66,8 @@ public class DishTest {
 
     // 5th test - calories of a dish
     @Test
-    public void caloriesOfFishAndChipsShouldBe830() {
-        assertEquals(830, fishAndChips.calories(), 0.01);
+    public void caloriesOfFishAndChipsShouldBe875() {
+        assertEquals(875, fishAndChips.calories(), 0.01);
     }
 
     // 6th test - protein of a dish, implement strategy pattern
@@ -82,7 +84,14 @@ public class DishTest {
 
     // 8th test - fat of a dish, test unit conversion
     @Test
-    public void fatOfCurryChickenShouldBe40pt2() {
-        assertEquals(40.2, curryChicken.fat(), 0.01);
+    public void fatOfCurryChickenShouldBe44pt9() {
+        assertEquals(44.9, curryChicken.fat(), 0.01);
     }
+
+    // 9th test - add cooking method
+    @Test
+    public void fatOfRoastChickenShouldBe122() {
+        assertEquals(122, roastChicken.fat(), 0.01);
+    }
+
 }

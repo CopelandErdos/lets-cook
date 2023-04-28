@@ -42,4 +42,8 @@ public class Quantity {
     public double multiplyPerUnit(double propValue, Quantity valuePerUnit) {
         return propValue * this.convertTo(valuePerUnit.unit).magnitude / valuePerUnit.magnitude;
     }
+
+    public double multiplyPerUnit(double propValue) {
+        return multiplyPerUnit(propValue, new Quantity(1, Unit.OZ));
+    }
 }

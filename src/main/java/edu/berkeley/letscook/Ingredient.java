@@ -3,6 +3,11 @@ import java.util.function.Function;
 
 // understands the properties of each ingredient
 public class Ingredient {
+
+    // ingredientUnit:
+    // fish and chicken per lb
+    // potato, carrot, onion per item (mid-size item / oz)
+    // units: cost-USD, calorie-calorie, protein-gram, carbohydrate-gram, fat-gram
     private final Quantity ingredientUnit;
     private final double cost;
     private final double calorie;
